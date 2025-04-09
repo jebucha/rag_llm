@@ -53,3 +53,10 @@ This isn't necessarily a precise word for word because when input files are "emb
 * Text Classification: Use sentence embeddings as input features for text classification tasks.
 * Clustering: Group similar sentences or documents together based on their embeddings.
 * Information Retrieval: Improve search results by using sentence embeddings to rank documents.
+
+7. For the rag_ui.py, that launches a simple web ui locally using a Python library called "streamlit". To use that you should be able to run
+```
+(rag_env) john@pop-os:~/repos/rag_env$ streamlit run rag_ui.py
+```
+
+And it should launch the page in your default browser, it should launch your default browser andload http://localhost:8501, and present a simple input to run queries against your processed data.
