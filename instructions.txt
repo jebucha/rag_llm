@@ -46,7 +46,7 @@ Finished ingesting 165 chunks from 25 files.
 
 You'll be prompted to enter a question (natural language), it may take a bit depending on the performance of your computer, download speed of the Mistral model from Ollama (it's about 4.1GB), etc but you it should return an answer drawn from your documents.
 
-This isn't necessarily a precise word for word because when input files are "embedded" / transformed the process is as follows:
+This isn't necessarily a precise word for word but when input files are "embedded" / transformed the process is roughly as follows:
 
 * Text Embeddings: Generate dense vector representations of sentences, paragraphs, or documents.
 * Semantic Search: Find similar sentences or documents based on their semantic meaning.
