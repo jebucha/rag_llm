@@ -59,4 +59,4 @@ This isn't necessarily a precise word for word because when input files are "emb
 (rag_env) john@pop-os:~/repos/rag_env$ streamlit run rag_ui.py
 ```
 
-And it should launch the page in your default browser, it should launch your default browser andload http://localhost:8501, and present a simple input to run queries against your processed data.
+That should launch your default browser and load http://localhost:8501, and present a simple input to run queries against your processed data.
