@@ -6,6 +6,8 @@ curl -fsSL https://ollama.com/install.sh | sh
 ollama pull mistral
 ollama pull cogito
 ```
+In the ask_md.py, towards the bottom, try alternating between the mistral and cogito models.
+
 2.
 ```
 mkdir repos
