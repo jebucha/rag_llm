@@ -3,6 +3,8 @@ Basic setup instructions on Debian/Ubuntu/Pop!_OS
 1. 
 ```
 curl -fsSL https://ollama.com/install.sh | sh
+ollama pull mistral
+ollama pull cogito
 ```
 2.
 ```
