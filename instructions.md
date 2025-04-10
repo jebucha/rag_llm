@@ -24,6 +24,7 @@ john@localhost repos% git clone git@github.com:jebucha/rag_llm.git
 ```
 
 3. Install Ollama for MacOS and pull 2 models to start with
+
 https://ollama.com/download/Ollama-darwin.zip
 Unzip that and copy / move Ollama.app to your Applicatins folder, then run it
 After Ollama is up and running, back to Terminal
