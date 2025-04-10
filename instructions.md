@@ -3,6 +3,7 @@
 ## On MacOS
 
 1. Install brew package manager, makes working with different Python versions easy
+
 Open Terminal
 ```
 john@localhost:~ /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
