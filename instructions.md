@@ -2,7 +2,7 @@
 
 ## On MacOS
 
-1. Install brew package manager, makes working with different Python versions easy
+1. Install brew package manager, makes working with different Python versions easy, using Python 3.10 for compatibility reasons
 
 Open Terminal
 ```
