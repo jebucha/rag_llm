@@ -8,7 +8,7 @@ import chromadb
 model = SentenceTransformer("all-MiniLM-L6-v2")
 
 # Directory containing Markdown files
-md_directory = "/home/john/repos/lists"  # Adjust this to your directory path
+md_directory = input("Enter path to your Markdown files, e.g. /Users/john/repos/lists: ").strip()  # Adjust this to your directory path
 persist_path = "./chroma_db"
 
 # Find all Markdown files (*.md) in directory
