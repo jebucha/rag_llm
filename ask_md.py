@@ -37,6 +37,10 @@ Question: {question}
 Answer:
 """
 
+print("\n----- PROMPT SENT TO LLM -----\n")
+print(prompt)
+print("\n------------------------------\n")
+
 response = ollama.chat(
     model="mistral",
     messages=[{"role": "user", "content": prompt}]
