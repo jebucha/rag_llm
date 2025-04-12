@@ -32,6 +32,7 @@ After Ollama is up and running, back to Terminal
 ```
 john@localhost:~ ollama pull mistral
 john@localhost:~ ollama pull cogito
+john@localhost:~ ollama pull gemma3
 ```
 
 4. You can rename the folder if you like, but just to get you started
@@ -39,10 +40,7 @@ john@localhost:~ ollama pull cogito
 john@localhost repos% cd rag_llm
 john@localhost rag_llm% source ../rag_env/bin/activate
 (rag_env) john@localhost rag_llm% pip install -r requirements.txt
-(rag_env) john@localhost rag_llm% python ingest_multiple_md.py
-[ This will prompt you for the path to your Markdown files, can be relative or absolute, will then ingest and process them ]
-(rag_llm) john@localhost rag_llm% python verify_count.py
-(rag_llm) john@localhost rag_llm% python ask_md.py
+(rag_env) john@localhost rag_llm% python rag_dashboard.py
 ```
 
 [ This will prompt you for the question you wish to ask, it then transforms or "embeds" your question into vector representation, performs search against vector db finding similar sentences or documents, builds LLM prompt using the retrieved data as an instruction "Use the following documents to answer your question", and then the question itself. I've added 3 print lines to the ask_md.py so I could see what was being sent to the LLM. ]
@@ -56,6 +54,7 @@ john@localhost rag_llm% source ../rag_env/bin/activate
 curl -fsSL https://ollama.com/install.sh | sh
 ollama pull mistral
 ollama pull cogito
+ollama pull gemma3
 ```
 In the ask_md.py, towards the bottom, try alternating between the mistral and cogito models.
 
