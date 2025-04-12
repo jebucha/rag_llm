@@ -5,3 +5,4 @@ huggingface-hub==0.14.1
 numpy==1.26.4
 streamlit
 ollama
+tiktoken
