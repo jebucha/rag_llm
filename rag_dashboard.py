@@ -19,7 +19,12 @@ st.set_page_config(page_title="RAG Dashboard")
 st.title("RAG Document Assistant")
 
 # Tabs
-tab_query, tab_ingest_pdf, tab_ingest_md = st.tabs(["Ask Questions", "Ingest PDF Files", "Ingest Markdown Files"])
+tab_query, tab_ingest_pdf, tab_ingest_md, tab_verify = st.tabs([
+    "Ask Questions",
+    "Ingest PDF Files",
+    "Ingest Markdown Files",
+    "Verify Document Count"
+])
 
 # ----------------------------
 # Tab 1: Ask Questions
@@ -159,3 +164,15 @@ with tab_ingest_md:
 
         st.info("Ingestion complete. You can now query these documents using the 'Ask Questions' tab.")
 
+# ----------------------------
+# Tab 4: Verify Document Count
+# ----------------------------
+with tab_verify:
+    st.header("Verify Stored Document Count")
+
+    try:
+        count = collection.count()
+        st.success(f"Total documents stored in Chroma vector DB: {count}")
+    except Exception as e:
+        st.error("Error retrieving document count.")
+        st.code(str(e))
