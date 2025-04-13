@@ -3,10 +3,10 @@ import os
 import re
 import streamlit as st
 import fitz  # PyMuPDF
-import tiktoken
 from sentence_transformers import SentenceTransformer
 import chromadb
 from ollama import Client as OllamaClient
+from transformers import AutoTokenizer
 
 # Load model and Chroma client
 model = SentenceTransformer("all-MiniLM-L6-v2")
@@ -35,18 +35,18 @@ with tab_query:
     top_n = st.slider("How many chunks to retrieve?", 1, 10, 3)
     model_choice = st.selectbox("Choose LLM model", ["mistral", "cogito", "gemma3"])
 
-if question:
-    collection = client.get_or_create_collection("tutorial_docs")
-    embedding = model.encode(question)
-    results = collection.query(query_embeddings=[embedding.tolist()], n_results=top_n)
+    if question:
+        collection = client.get_or_create_collection("tutorial_docs")
+        embedding = model.encode(question)
+        results = collection.query(query_embeddings=[embedding.tolist()], n_results=top_n)
 
-    docs = results.get("documents", [[]])[0]
-    if not docs:
-        st.warning("No matching documents found.")
-    else:
-        # Create prompt text from ranked chunks
-        ranked_chunks = "\n\n".join([f"[Chunk {i+1}]\n{doc}" for i, doc in enumerate(docs)])
-        prompt = f"""You are a helpful assistant.
+        docs = results.get("documents", [[]])[0]
+        if not docs:
+            st.warning("No matching documents found.")
+        else:
+            # Step 1: Build prompt
+            ranked_chunks = "\n\n".join([f"[Chunk {i+1}]\n{doc}" for i, doc in enumerate(docs)])
+            prompt = f"""You are a helpful assistant.
 
 Use the following retrieved text chunks to answer the question.
 
@@ -58,30 +58,41 @@ Chunks:
 Question: {question}
 Answer:"""
 
-        try:
-            enc = tiktoken.encoding_for_model("gpt-3.5-turbo")
-        except:
-            enc = tiktoken.get_encoding("cl100k_base")
-        token_count = len(enc.encode(prompt))
+            # Step 2: Load tokenizer and count tokens
+            try:
+                if model_choice == "mistral":
+                    tokenizer = AutoTokenizer.from_pretrained("hf-internal-testing/llama-tokenizer")
+                elif model_choice == "gemma3":
+                    tokenizer = AutoTokenizer.from_pretrained("sentence-transformers/all-MiniLM-L6-v2")
+                elif model_choice == "cogito":
+                    tokenizer = AutoTokenizer.from_pretrained("NousResearch/Llama-2-7b-hf")
+                else:
+                    tokenizer = AutoTokenizer.from_pretrained("bert-base-uncased")
 
-        response = ollama.chat(
-            model=model_choice,
-            messages=[{"role": "user", "content": prompt}]
-        )
-        answer = response["message"]["content"].strip()
+                token_count = len(tokenizer.encode(prompt))
+            except Exception as e:
+                st.warning(f"Tokenizer error: {e}")
+                token_count = 0
 
-        st.subheader("Answer")
-        st.write(answer)
-        st.markdown(f"Prompt token count: {token_count}")
+            # Step 3: Generate response
+            response = ollama.chat(
+                model=model_choice,
+                messages=[{"role": "user", "content": prompt}]
+            )
+            answer = response["message"]["content"].strip()
 
-        with st.expander("Show retrieved context"):
-            for i, doc in enumerate(docs):
-                st.markdown(f"Chunk {i+1}")
-                st.code(doc)
+            # Step 4: Display results
+            st.subheader("Answer")
+            st.write(answer)
+            st.markdown(f"Prompt token count: {token_count}")
 
-        with st.expander("Show prompt sent to model"):
-            st.code(prompt)
+            with st.expander("Show retrieved context"):
+                for i, doc in enumerate(docs):
+                    st.markdown(f"Chunk {i+1}")
+                    st.code(doc)
 
+            with st.expander("Show prompt sent to model"):
+                st.code(prompt)
 
 # ----------------------------
 # Tab 2: Ingest PDF/TXT/DOCX Files
@@ -231,3 +242,4 @@ with tab_verify:
     except Exception as e:
         st.error("Error retrieving collection info.")
         st.code(str(e))
+
