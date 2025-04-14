@@ -33,7 +33,7 @@ with tab_query:
     st.header("Ask Questions About Your Documents")
     question = st.text_input("Enter your question:")
     top_n = st.slider("How many chunks to retrieve?", 1, 10, 3)
-    model_choice = st.selectbox("Choose LLM model", ["mistral", "cogito", "gemma3"])
+    model_choice = st.selectbox("Choose LLM model", ["mistral", "cogito", "gemma3", "ALIENTELLIGENCE/contractanalyzerv2"])
 
     if question:
         collection = client.get_or_create_collection("tutorial_docs")
