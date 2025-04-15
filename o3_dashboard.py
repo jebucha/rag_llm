@@ -31,7 +31,7 @@ def load_tokenizer(model_choice: str) -> AutoTokenizer:
     Load and cache the tokenizer based on the given model choice.
     """
     tokenizer_map = {
-        "mistral": "mistralai/Mistral-7B-v0.1",
+        "mistral": "intfloat/e5-mistral-7b-instruct",
         "gemma3": "google/generative-ai",
         "cogito": "NousResearch/Llama-2-7b-hf",
         "ALIENTELLIGENCE/contractanalyzerv2": "sentence-transformers/all-MiniLM-L6-v2",  # Fallback; update if a dedicated tokenizer is available.
