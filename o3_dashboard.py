@@ -2,7 +2,7 @@ import os
 import re
 import streamlit as st
 import fitz  # PyMuPDF
-import python-docx
+import docx
 import chromadb
 from ollama import Client as OllamaClient
 from sentence_transformers import SentenceTransformer
