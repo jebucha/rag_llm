@@ -1,6 +1,11 @@
 import os
 import re
+
 import streamlit as st
+# This must be the first Streamlit command
+st.set_page_config(page_title="RAG Dashboard")
+st.title("RAG Document Assistant")
+
 import fitz  # PyMuPDF
 import docx
 import chromadb
@@ -42,12 +47,6 @@ persist_path = "./chroma_db"
 client = chromadb.PersistentClient(path=persist_path)
 ollama = OllamaClient()
 
-# ----------------------------
-# Streamlit Page Configuration
-# ----------------------------
-
-st.set_page_config(page_title="RAG Dashboard")
-st.title("RAG Document Assistant")
 
 # ----------------------------
 # Helper Functions

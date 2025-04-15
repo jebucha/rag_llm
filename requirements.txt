@@ -7,3 +7,5 @@ streamlit
 ollama
 tiktoken
 PyMuPDF
+watchdog
+python-docx
