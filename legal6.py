@@ -39,6 +39,7 @@ console_handler.setFormatter(formatter)
 
 logger.addHandler(file_handler)
 logger.addHandler(console_handler)
+=======
 
 # This must be the first Streamlit command
 st.set_page_config(
@@ -528,10 +529,13 @@ def monitor_resources(resource_status, interval=2.0):
         resource_status["message"] = "psutil not available"
         while not st.session_state.stop_ingestion and st.session_state.ingestion_running:
             time.sleep(5)  # Just sleep and do nothing
+<<<<<<< HEAD
     except Exception as e:
         error_details = traceback.format_exc()
         logger.error("Error processing file %s: %s", file_name, error_details)
         return {**result, "error": f"{str(e)}\n{error_details}"}
+=======
+>>>>>>> 210c68d (Adding back legal6 and llama_dashboard)
 
 # Function to manage the worker pool size
 def adjust_workers(executor, resource_status, initial_workers):
