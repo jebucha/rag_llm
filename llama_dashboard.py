@@ -26,8 +26,8 @@ st.title("RAG Document Assistant")
 # ----------------------------
 PERSIST_PATH   = "./chroma_db"
 INPUT_TYPES    = ["pdf", "txt", "docx", "md"]
-MAX_TOKENS     = 400
-STRIDE_TOKENS  = 50
+MAX_TOKENS     = 100
+STRIDE_TOKENS  = 25
 MODEL_CHOICES  = ["mistral", "cogito", "gemma3", "llama3-q4"]
 
 # ----------------------------
