@@ -27,8 +27,8 @@ st.title("RAG Document Assistant")
 # ----------------------------
 PERSIST_PATH   = "./chroma_db"
 INPUT_TYPES    = ["pdf", "txt", "docx", "md"]
-MAX_TOKENS     = 400
-STRIDE_TOKENS  = 50
+MAX_TOKENS     = 100
+STRIDE_TOKENS  = 25
 MODEL_CHOICES  = ["mistral", "cogito", "gemma3"]
 
 # ----------------------------
@@ -47,7 +47,6 @@ def load_tokenizer(model_choice: str) -> AutoTokenizer:
     tokenizer_map = {
         "mistral": "intfloat/e5-mistral-7b-instruct",
         "cogito": "NousResearch/Llama-2-7b-hf",
-        "gemma3": "google/generative-ai",
     }
     model_id = tokenizer_map.get(model_choice, "sentence-transformers/all-MiniLM-L6-v2")
     return AutoTokenizer.from_pretrained(model_id)
